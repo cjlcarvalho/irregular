@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Irregular Verbs - Question</title>
+</head>
+<body>
+
+<form action="" method="post">
+	
+	<table>
+		<tr>
+			<td>Verb: &nbsp;<b>{{ questao }}</b></td>
+		</tr>
+		<tr>
+			<td>Answer: &nbsp;<input type="text" name="resposta" value="{{ request.form.resposta }}"></td>
+		</tr>
+		
+	</table>
+	<br>
+	<input type="submit" value="Responder"> 
+</form>
+
+</body>
+</html>
