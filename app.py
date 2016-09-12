@@ -1,4 +1,4 @@
-# coding: utf8
+# -*- coding: utf8 -*-
 
 from flask import Flask, render_template, request, url_for, redirect, session
 from flask_sqlalchemy import SQLAlchemy
