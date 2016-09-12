@@ -1,5 +1,4 @@
 # -*- coding: utf8 -*-
-
 from flask import Flask, render_template, request, url_for, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_cache import Cache
@@ -9,7 +8,6 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-
 app.config['CACHE_TYPE'] = 'simple'
 app.cache = Cache(app) 
 
@@ -42,13 +40,11 @@ def random():
 
 @app.route('/question', methods=["GET", "POST"])
 def question():
-
     questao = Question.query.filter_by(_id=random()).first()
     pergunta = questao.pergunta
     session['correto'] = questao.resposta
 
     if request.method == "POST":
-
         resposta = request.form['resposta']
         session['resposta'] = resposta
         return redirect(url_for('answer'))
