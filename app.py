@@ -35,15 +35,15 @@ for verb in verbs:
     db.session.add(v)
 db.session.commit()
 
-@app.cache.memoize(timeout=5)
+@app.cache.memoize(50)
 def random():
-    num = randint(1, len(verbs))
+    num = Question.query.filter_by(_id=randint(1, len(verbs))).first()
     return num
 
 @app.route('/question', methods=["GET", "POST"])
 def question():
-
-    questao = Question.query.filter_by(_id=random()).first()
+    
+    questao = random()
     pergunta = questao.pergunta
     session['correto'] = questao.resposta
 
@@ -52,17 +52,20 @@ def question():
         resposta = request.form['resposta']
         session['resposta'] = resposta
         return redirect(url_for('answer'))
-
+    
     return render_template('question.html', questao=pergunta.upper())
 
 @app.route('/answer')
 def answer():
-    if session.get('correto') == session.get('resposta'):
+    r = session.get('correto')
+    s = session.get('resposta')
+    app.cache.delete_memoized(random)
+    if r == s:
         valida = True 
     else:
         valida = False
 
-    return render_template('answer.html', valida=valida, correto=session.get('correto'), resposta=session.get('resposta'))
+    return render_template('answer.html', valida=valida, correto=r, resposta=s)
 
 if __name__ == '__main__':
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
