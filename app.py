@@ -59,7 +59,7 @@ def answer():
     respostaUser = session.get('resposta')
     app.cache.delete_memoized(random)
 
-    if respostaCorreta == respostaUser:
+    if respostaCorreta.lower() == respostaUser.lower():
         valida = True 
     else:
         valida = False
