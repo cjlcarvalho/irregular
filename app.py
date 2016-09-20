@@ -35,8 +35,8 @@ db.session.commit()
 
 @app.cache.memoize(50)
 def random():
-    num = Question.query.filter_by(_id=randint(1, len(verbs))).first()
-    return num
+    questao = Question.query.filter_by(_id=randint(1, len(verbs))).first()
+    return questao
 
 @app.route('/question', methods=["GET", "POST"])
 def question():
