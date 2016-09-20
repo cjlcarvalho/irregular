@@ -40,12 +40,8 @@ def random():
 
 @app.route('/question', methods=["GET", "POST"])
 def question():
-<<<<<<< HEAD
     
     questao = random()
-=======
-    questao = Question.query.filter_by(_id=random()).first()
->>>>>>> 84b08c7bd9847af08c0f09590130d7e45816b9fe
     pergunta = questao.pergunta
     session['correto'] = questao.resposta
 
@@ -58,16 +54,19 @@ def question():
 
 @app.route('/answer')
 def answer():
-    r = session.get('correto')
-    s = session.get('resposta')
+
+    respostaCorreta = session.get('correto')
+    respostaUser = session.get('resposta')
     app.cache.delete_memoized(random)
-    if r == s:
+
+    if respostaCorreta == respostaUser:
         valida = True 
     else:
         valida = False
 
-    return render_template('answer.html', valida=valida, correto=r, resposta=s)
+    return render_template('answer.html', valida=valida, correto=respostaCorreta, resposta=respostaUser)
 
 if __name__ == '__main__':
+
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
     app.run(port=8080, debug=True, host='0.0.0.0')
