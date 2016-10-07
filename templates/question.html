@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Irregular Verbs - Question</title>
+	<title>Irregular Verbs - Answer</title>
+	<link rel="stylesheet" type="text/css" href="static/game.css"/>
 </head>
 <body>
-
-<form action="" method="post">
-	
-	<table>
-		<tr>
-			<td>Verb: &nbsp;<b>{{ questao }}</b></td>
-		</tr>
-		<tr>
-			<td>Answer: &nbsp;<input type="text" name="resposta" value="{{ request.form.resposta }}"></td>
-		</tr>
-		
-	</table>
-	<br>
-	<input type="submit" value="Responder"> 
-</form>
-
+<div id="game">
+	<form action="" method="post">
+		<div id="questao">
+			
+			<img src="static/socorro_errado.svg" />
+			<div id="status">
+				<div>
+					<p>Verb: &nbsp;<b>{{ questao }}</p>
+				</div>
+			</div>
+			<div id="sua-resposta">
+				<div>
+					<p>Answer: &nbsp;<input type="text" name="resposta" value="{{ request.form.resposta }}"></p>
+					<input id="enviar" type="submit" value="Responder"> 
+				</div>
+			</div>
+		</div><!--#questao-->
+	</form>
+</div><!--#game-->
 </body>
 </html>

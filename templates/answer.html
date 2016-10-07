@@ -2,17 +2,43 @@
 <html>
 <head>
 	<title>Irregular Verbs - Answer</title>
+	<link rel="stylesheet" type="text/css" href="static/game.css"/>
 </head>
 <body>
+<div id="game">
 
 {% if valida %}
-	<p>Correto!</p>
-	<p><a href="{{ url_for('question') }}">Voltar</a></p>
+
+	<div id="correto">
+		<p id="voltar"><a href="{{ url_for('question') }}">Voltar</a></p>
+		<img src="static/socorro_correto.svg" />
+		<div id="status">
+			<div>
+				<p>Correto!</p>
+			</div>
+		</div>
+	</div><!--#correto-->
+
+
 {% else %}
-	<p>Errado! Correto: {{ correto }}</p>
-	<p>Sua resposta: {{ resposta }}</p>
-	<p><a href="{{ url_for('question') }}">Voltar</a></p>
+
+	<div id="errado">
+		<p id="voltar"><a href="{{ url_for('question') }}">Voltar</a></p>
+		<img src="static/socorro_errado.svg" />
+		<div id="status">
+			<div>
+				<p>Errado! Correto: {{ correto }}</p>
+			</div>
+		</div>
+		<div id="sua-resposta">
+			<div>
+				<p>Sua resposta: {{ resposta }}</p>
+			</div>
+		</div>
+	</div><!--#errado-->
+
 {% endif %}
 
+</div><!--#game-->
 </body>
 </html>
